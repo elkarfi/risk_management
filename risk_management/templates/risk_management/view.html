@@ -1,0 +1,28 @@
+
+{% if id == "im risk" %}
+
+<h1>Risk Details</h1>
+
+{{obj.risk_description}}
+{{ obj.severity}}
+{{ obj.status}}
+{{ obj.action_taken}}
+{{ obj.end_date}}
+{{ obj.department}}
+{{ obj.employee}}
+{{ obj.last_update}}
+
+{% elif id  == "im employee" %}
+
+<h1>Employee Details</h1>
+
+{{obj.department}}
+{{obj.first_name}}
+{{obj.last_name}}
+{{obj.birth_date}}
+
+{% endif %} 
+
+
+
+
