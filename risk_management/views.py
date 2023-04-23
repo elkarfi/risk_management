@@ -2,11 +2,22 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import RiskForm, DepartmentForm, EmployeeForm
 from .models import Risk, Department, Employee
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 
 
 # Create your views here.
 
+def welcome(request):
+      context={}
+      return render(request, 'risk_management/welcome.html', context)
+
+
+
+@login_required(login_url="welcome")
 def home(request):
      risks = Risk.objects.all()
      total_risk = Risk.objects.count()
@@ -34,6 +45,9 @@ def home(request):
      return render(request, 'risk_management/home.html', context)
 
 
+
+
+@login_required(login_url="welcome")
 def create_risk(request):
      form =RiskForm()
 
@@ -49,6 +63,7 @@ def create_risk(request):
 
 
 
+@login_required(login_url="welcome")
 def update_risk(request, pk):
      
      risk = Risk.objects.get(id=pk)
@@ -66,6 +81,7 @@ def update_risk(request, pk):
 
 
 
+@login_required(login_url="welcome")
 def delete_risk(request, pk):
      risk = Risk.objects.get(id=pk)
 
@@ -77,6 +93,9 @@ def delete_risk(request, pk):
      return render(request,'risk_management/delete.html',{'obj':risk} )
 
 
+
+
+@login_required(login_url="welcome")
 def view_risk(request, pk):
      
      risk = Risk.objects.get(id=pk)
@@ -85,7 +104,7 @@ def view_risk(request, pk):
 
 
 
-
+@login_required(login_url="welcome")
 def create_department(request):
      form =DepartmentForm()
 
@@ -102,6 +121,7 @@ def create_department(request):
 
 
 
+@login_required(login_url="welcome")
 def delete_department(request, pk):
      department = Department.objects.get(id=pk)
 
@@ -116,6 +136,7 @@ def delete_department(request, pk):
 
 
 
+@login_required(login_url="welcome")
 def create_employee(request):
      form =EmployeeForm()
 
@@ -130,7 +151,7 @@ def create_employee(request):
      return render(request,'risk_management/form.html', context )
 
 
-
+@login_required(login_url="welcome")
 def update_employee(request, pk):
      
      employee = Employee.objects.get(id=pk)
@@ -149,7 +170,7 @@ def update_employee(request, pk):
 
 
 
-
+@login_required(login_url="welcome")
 def delete_employee(request, pk):
      employee = Employee.objects.get(id=pk)
 
@@ -162,9 +183,51 @@ def delete_employee(request, pk):
 
 
 
+@login_required(login_url="welcome")
 def view_employee(request, pk):
      
      employee = Employee.objects.get(id=pk)
     
      return render(request,'risk_management/view.html',{'obj':employee, 'id':"im employee"} )
 
+
+
+
+
+def login_page(request):
+
+     if request.user.is_authenticated:
+           return redirect('home')
+
+
+
+     if request.method == 'POST':
+           username= request.POST.get('username')
+           password= request.POST.get('password')
+
+           try:
+
+               user = User.objects.get(username=username)
+
+           except:
+
+               messages.error(request, 'User does not exist')
+
+
+           user = authenticate(request, username=username, password=password)
+
+           if user is not None:
+               login(request, user)
+               messages.success(request, "You have successfully Logged In.")
+               return redirect('home')
+           else:
+               messages.error(request, 'Username OR password does not exit')
+
+     context = {}
+     return render(request,'risk_management/login.html',context )
+
+     
+
+def logout_employee(request):
+          logout(request)
+          return redirect('welcome')
