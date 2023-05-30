@@ -11,10 +11,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-def welcome(request):
-      context={}
-      return render(request, 'risk_management/welcome.html', context)
-
 
 
 @login_required(login_url="welcome")
@@ -42,7 +38,7 @@ def home(request):
                }
      
      
-     return render(request, 'risk_management/home.html', context)
+     return render(request, 'risk_management/new_home.html', context)
 
 
 
@@ -127,13 +123,11 @@ def delete_department(request, pk):
 
 
 @login_required(login_url="welcome")
-def view_department(request, pk):
+def view_department(request):
      
-     department = Department.objects.get(id=pk)
+     department = Department.objects.all()
     
-     return render(request,'risk_management/view.html',{'obj':department, 'id':"im department"} )
-
-
+     return render(request,'risk_management/employee_table.html',{'obj':department, 'id':"im department"} )
 
 
 
@@ -190,11 +184,11 @@ def delete_employee(request, pk):
 
 
 @login_required(login_url="welcome")
-def view_employee(request, pk):
+def view_employee(request):
      
-     employee = Employee.objects.get(id=pk)
-    
-     return render(request,'risk_management/view.html',{'obj':employee, 'id':"im employee"} )
+     employee = Employee.objects.all()
+
+     return render(request,'risk_management/employee_table.html',{'obj':employee,'id':"im employee"} )
 
 
 
