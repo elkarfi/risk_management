@@ -1,0 +1,160 @@
+{% extends 'new_main.html' %}
+
+{% block content %}
+
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard" >
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-11">
+        <div class="row">
+
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
+
+
+              <div class="card-body">
+                <h5 class="card-title">Sales <span>| Today</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-cart"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{total_risk}}</h6>
+                    <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Sales Card -->
+
+          <!-- Revenue Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+
+              <div class="card-body">
+                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-currency-dollar"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{opened}}</h6>
+                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Revenue Card -->
+
+           <!-- Revenue Card -->
+           <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+              <div class="card-body">
+                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-currency-dollar"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{closed}}</h6>
+                    <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Revenue Card -->
+
+
+          <!-- Recent Sales -->
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+              <div class="card-body">
+                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+
+                <table class="table table-borderless datatable">
+                  <thead>
+
+                    <tr>
+
+                      <th scope="col">Description</th>
+                      <th scope="col"> Severity </th>
+                      <th scope="col"> End date </th>
+                      <th scope="col"> Employee </th>
+                      <th scope="col">Action taken</th>
+                      <th scope="col"> Department </th>
+                      <th scope="col"> action </th>
+
+                       
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    {% for risk in risks %}
+
+                    <tr>
+                      <td>{{risk.risk_description}}</td>
+                      <td>{{risk.severity}}</td>
+                      <td>{{risk.action_taken}}</td>
+                      <td>{{risk.end_date}}</td>
+                      <td>{{risk.department}}</td>
+                      <td>{{risk.employee.username}}</td>
+
+                      <td>
+                      <a href="{% url 'update_risk' risk.id %}" class="btn btn-success btn-sm" title="Remove my profile image"><i class="bi bi-pencil-square"></i></a>
+                      <a href="{% url 'delete_risk' risk.id %}" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                      </td>
+
+                    </tr>
+                     
+                    {% endfor %}
+
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+
+        </div>
+      </div><!-- End Left side columns -->
+
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+
+
+
+{% endblock content%}

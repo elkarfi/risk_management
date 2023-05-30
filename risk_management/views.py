@@ -59,7 +59,7 @@ def create_risk(request):
 
 
      context = {'form':form}
-     return render(request,'risk_management/form.html', context )
+     return render(request,'risk_management/new_risk_form.html', context )
 
 
 
@@ -77,7 +77,7 @@ def update_risk(request, pk):
 
 
      context = {'form':form}
-     return render(request,'risk_management/form.html', context )
+     return render(request,'risk_management/new_risk_form.html', context )
 
 
 
@@ -90,16 +90,7 @@ def delete_risk(request, pk):
                return redirect('home')
 
 
-     return render(request,'risk_management/delete.html',{'obj':risk} )
-
-
-
-
-@login_required(login_url="welcome")
-def view_risk(request, pk):
-     
-     risk = Risk.objects.get(id=pk)
-     return render(request,'risk_management/view.html',{'obj':risk,'id':"im risk"} )
+     return render(request,'risk_management/new_delete.html',{'obj':risk} )
 
 
 
@@ -116,7 +107,7 @@ def create_department(request):
 
 
      context = {'form':form}
-     return render(request,'risk_management/form.html', context )
+     return render(request,'risk_management/new_department_form.html', context )
 
 
 
@@ -135,6 +126,21 @@ def delete_department(request, pk):
 
 
 
+@login_required(login_url="welcome")
+def view_department(request, pk):
+     
+     department = Department.objects.get(id=pk)
+    
+     return render(request,'risk_management/view.html',{'obj':department, 'id':"im department"} )
+
+
+
+
+
+
+
+
+
 
 @login_required(login_url="welcome")
 def create_employee(request):
@@ -148,7 +154,7 @@ def create_employee(request):
 
 
      context = {'form':form}
-     return render(request,'risk_management/form.html', context )
+     return render(request,'risk_management/new_employee_form.html', context )
 
 
 @login_required(login_url="welcome")
@@ -224,10 +230,10 @@ def login_page(request):
                messages.error(request, 'Username OR password does not exit')
 
      context = {}
-     return render(request,'risk_management/login.html',context )
+     return render(request,'risk_management/new_login.html',context )
 
-     
+   
 
 def logout_employee(request):
           logout(request)
-          return redirect('welcome')
+          return redirect('login')
