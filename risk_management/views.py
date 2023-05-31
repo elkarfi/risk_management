@@ -165,7 +165,9 @@ def update_employee(request, pk):
                return redirect('home')
 
 
-     context = {'form':form}
+     context = {'form':form,
+                'employee':employee
+                }
      return render(request,'risk_management/edit_employee.html', context )
 
 
