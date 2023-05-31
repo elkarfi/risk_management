@@ -117,7 +117,7 @@ def delete_department(request, pk):
                return redirect('home')
 
 
-     return render(request,'risk_management/delete.html',{'obj':department} )
+     return render(request,'risk_management/new_delete.html',{'obj':department} )
 
 
 

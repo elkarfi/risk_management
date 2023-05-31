@@ -25,51 +25,70 @@
                   <h5 class="card-title">Default Table</h5>
     
 
-                  {% if id == "im employee" %}
+                  {% if id == "im department" %}
 
 
                   <!-- Default Table -->
                   <table class="table">
+                    
+                    
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Department Name</th>
-                        
+                        <th scope="col">Department Name</th>
+                        <th scope="col">action</th>       
                       </tr>
                     </thead>
+
                     <tbody>
+
+                      {% for departments in obj %}
+
                       <tr>
-                        <th scope="row">1</th>
-                        <td>pedro</td>
-                        <td>Designer</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
-                      </tr>
+
+                        <td>{{departments.id}}</td>
+                        <td>{{departments.name_department}}</td>
+                     <td>
                       
+                      <a href="{% url 'delete_department' departments.id %}" class="btn btn-black btn-sm" title="Remove "><i class="bi bi-trash"></i></a>
+
+                     </td> 
+                      </tr>
+
+                      {% endfor %}
+
                     </tbody>
                   </table>
                   <!-- End Default Table Example -->
     
-                  {% elif id  == "im department" %}
+                  {% elif id  == "im employee" %}
 
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Start Date</th>
+                        <th scope="col">first_name</th>
+                        <th scope="col">last_name</th>
+                        <th scope="col">department</th>
+                        <th scope="col">Action</th>
+
                       </tr>
                     </thead>
                     <tbody>
+
+                      {% for employees in obj %}
+
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Brandon Jacob</td>
-                        <td>Designer</td>
-                        <td>28</td>
-                        <td>2016-05-25</td>
+                        <td>{{employees.first_name}}</td>
+                        <td>{{employees.last_name}}</td>
+                        <td>{{employees.department}}</td>
+                        <td>
+                          
+                          <a href="{% url 'delete_department' employees.id %}" class="btn btn-black btn-sm" title="edit "><i class="bi bi-pencil-square"></i></a>
+
+                        </td>
                       </tr>
+
+                      {% endfor %}
 
                     </tbody>
                   </table>
