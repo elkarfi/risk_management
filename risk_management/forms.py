@@ -19,3 +19,8 @@ class EmployeeForm(ModelForm):
         class Meta:
             model  =   Employee
             fields = '__all__'
+
+
+        def __init__(self, *args, **kwargs):
+            super(EmployeeForm, self).__init__(*args, **kwargs)
+            self.fields['password'].required = False

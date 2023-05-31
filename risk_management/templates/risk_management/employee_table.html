@@ -83,7 +83,8 @@
                         <td>{{employees.department}}</td>
                         <td>
                           
-                          <a href="{% url 'delete_department' employees.id %}" class="btn btn-black btn-sm" title="edit "><i class="bi bi-pencil-square"></i></a>
+                          <a href="{% url 'update_employee' employees.id %}" class="btn btn-black btn-sm" title="edit "><i class="bi bi-pencil-square"></i></a>
+                          <a href="{% url 'delete_employee' employees.id %}" class="btn btn-black btn-sm" title="Remove "><i class="bi bi-trash"></i></a>
 
                         </td>
                       </tr>

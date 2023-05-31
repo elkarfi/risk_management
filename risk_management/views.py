@@ -157,6 +157,7 @@ def update_employee(request, pk):
      employee = Employee.objects.get(id=pk)
      form = EmployeeForm(instance=employee)
 
+
      if request.method == 'POST':
           form = EmployeeForm(request.POST, instance=employee )
           if form.is_valid():
@@ -165,7 +166,7 @@ def update_employee(request, pk):
 
 
      context = {'form':form}
-     return render(request,'risk_management/form.html', context )
+     return render(request,'risk_management/edit_employee.html', context )
 
 
 
@@ -179,7 +180,7 @@ def delete_employee(request, pk):
                return redirect('home')
 
 
-     return render(request,'risk_management/delete.html',{'obj':employee} )
+     return render(request,'risk_management/new_delete.html',{'obj':employee} )
 
 
 
