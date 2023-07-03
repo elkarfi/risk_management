@@ -11,6 +11,9 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+def percentage(part, whole):
+  return 100 * float(part)/float(whole)
+
 
 
 @login_required(login_url="welcome")
@@ -19,6 +22,9 @@ def home(request):
      total_risk = Risk.objects.count()
      opened = Risk.objects.filter(status="opened").count()
      closed = Risk.objects.filter(status="closed").count()
+     percentage_of_opened=percentage(opened, total_risk)
+     percentage_of_closed=percentage(closed, total_risk)
+     percentage_remaining=100.0-percentage_of_opened-percentage_of_closed
 
 
      departments = Department.objects.all()
@@ -31,7 +37,10 @@ def home(request):
           "employees":employees,
           "total_risk":total_risk,
           "opened":opened,
-          "closed":closed
+          "closed":closed,
+          "percentage_of_opened":percentage_of_opened,
+          "percentage_of_closed":percentage_of_closed,
+          "percentage_remaining":percentage_remaining
 
 
 

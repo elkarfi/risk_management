@@ -4,16 +4,35 @@
 
 <main id="main" class="main">
 
+  {% if id == "im department" %}
+
     <div class="pagetitle">
-      <h1>Form Layouts</h1>
+      <h1>Department Details</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Forms</li>
-          <li class="breadcrumb-item active">Layouts</li>
+          <li class="breadcrumb-item">Details</li>
+          <li class="breadcrumb-item active">Department</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
+
+    {% elif id  == "im employee" %}
+
+    <div class="pagetitle">
+      <h1>Employee Details</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Details</li>
+          <li class="breadcrumb-item active">Employee</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+
+    {% endif %} 
+
 
     <section class="section">
 
@@ -34,7 +53,7 @@
                     
                     <thead>
                       <tr>
-                        <th scope="col">Department Name</th>
+                        <th scope="col">Department Id</th>
                         <th scope="col">Department Name</th>
                         <th scope="col">action</th>       
                       </tr>
@@ -66,9 +85,9 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th scope="col">first_name</th>
-                        <th scope="col">last_name</th>
-                        <th scope="col">department</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Department Name</th>
                         <th scope="col">Action</th>
 
                       </tr>
